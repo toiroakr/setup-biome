@@ -153,7 +153,7 @@ jobs:
       - name: Check equality
         shell: bash
         run: |
-          if [ "Version: ${{ steps.latest.outputs.latest }}" == "${{ steps.latest.outputs.latest }}" ]; then
+          if [ "${{ steps.latest.outputs.latest }}" == "${{ steps.version.outputs.version }}" ]; then
             exit 0
           else
             echo "Versions do not match"
