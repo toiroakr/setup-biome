@@ -146,10 +146,14 @@ jobs:
         id: version
         shell: bash
         run: echo "version=$(biome --version)" >> "$GITHUB_OUTPUT"
+      - name: Retrieve the latest version
+        id: latest
+        shell: bash
+        run: echo "latest=$(npm show @biomejs/biome version)" >> "$GITHUB_OUTPUT"
       - name: Check equality
         shell: bash
         run: |
-          if [ "Version: ${{ env.BIOME_EXPECTED_VERSION }}" == "${{ steps.version.outputs.version }}" ]; then
+          if [ "Version: ${{ steps.latest.outputs.latest }}" == "${{ steps.latest.outputs.latest }}" ]; then
             exit 0
           else
             echo "Versions do not match"
